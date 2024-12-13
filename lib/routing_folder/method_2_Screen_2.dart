@@ -10,7 +10,7 @@ class MethodTwoRoutTwo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('$name',
+        title: Text(name,
             style: const TextStyle(
               color: Colors.white,
             )),
@@ -20,7 +20,7 @@ class MethodTwoRoutTwo extends StatelessWidget {
       body: SafeArea(
           child: Center(
               child: ElevatedButton(
-        child: Text('$message'),
+        child: Text(message),
         onPressed: () => Navigator.of(context).pop(),
       ))),
     );

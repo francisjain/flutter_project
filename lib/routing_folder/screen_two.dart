@@ -1,4 +1,3 @@
-import 'package:brocode_tutorial_1/routing_folder/screen_two.dart';
 import 'package:flutter/material.dart';
 
 class ScreenTwo extends StatelessWidget {

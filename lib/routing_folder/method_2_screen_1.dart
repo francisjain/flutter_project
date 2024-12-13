@@ -10,15 +10,23 @@ class MethodTwoRoutOne extends StatelessWidget {
         body: SafeArea(
             child: ListView.separated(
       itemBuilder: (context, int index) => ListTile(
-        onTap: () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => MethodTwoRoutTwo(
-                name: 'Person $index', message: 'Message $index'))),
+        onTap: () {
+          print('Person $index Message $index');
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => MethodTwoRoutTwo(
+                name: 'Person $index',
+                message: 'Message $index',
+              ),
+            ),
+          );
+        },
         title: Text('PERSON $index'),
         subtitle: Text('Message $index'),
         leading: CircleAvatar(
-          child: Text('$index'),
           backgroundColor: Colors.green,
-          backgroundImage: AssetImage('assets/images/Capture.PNG'),
+          backgroundImage: const AssetImage('assets/images/Capture.PNG'),
+          child: Text('$index'),
         ),
         trailing: Column(
           children: [Text('1$index:00 PM'), Text('1$index:00 AM')],

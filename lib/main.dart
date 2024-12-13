@@ -5,19 +5,21 @@ import 'package:brocode_tutorial_1/routing_folder/screen_one.dart';
 import 'package:brocode_tutorial_1/routing_folder/screen_two.dart';
 import 'package:flutter/material.dart';
 
+import 'locSharedPreference/locSharedpreferences.dart';
+
 void main() {
   runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  MainApp({super.key});
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
-      home: const MethodTwoRoutOne(),
+      home: LockPage(),
       // routes: {
       //   '/screen_one': (context) => const ScreenOne(),
       //   '/screen_two': (context) => const ScreenTwo(),

@@ -14,9 +14,9 @@ class ListViewPage extends StatelessWidget {
             title: Text('PERSON $index'),
             subtitle: Text('Message $index'),
             leading: CircleAvatar(
-              child: Text('$index'),
               backgroundColor: Colors.green,
-              backgroundImage: AssetImage('assets/images/Capture.PNG'),
+              backgroundImage: const AssetImage('assets/images/Capture.PNG'),
+              child: Text('$index'),
             ),
             trailing: Column(
               children: [Text('1$index:00 PM'), Text('1$index:00 AM')],

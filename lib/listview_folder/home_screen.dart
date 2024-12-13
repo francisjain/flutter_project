@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Home Screen'),
+            const Text('Home Screen'),
             DisplayWidget(count: _count),
           ],
         ),
