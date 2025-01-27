@@ -1,0 +1,90 @@
+1. form validation
+2.login and signOut functionality useing sharedpreference
+
+
+
+
+
+
+
+
+
+
+
+1. validation
+
+    1.1. form validation____________
+
+        final _formKey = GlobalKey<FormState>();
+
+        child: Form(
+            key: _formKey,            
+            //check this condition then if not moves to validator
+              onPressed: () => {
+                            if (_formKey.currentState!.validate())
+                              {loginSubmit(context)}
+                            else
+                              {
+                                setState(() {
+                                  _isDataMatch = true;
+                                })
+                              }
+                          },
+
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'username is required';
+                  }
+                  return null; // Return null if the input is valid
+                },
+
+    1.2 useing state 
+                    Visibility(
+                      visible: _isDataMatch,
+                      child: Text("Invalid username or password",
+                          style: TextStyle(color: Colors.blue.shade900))),
+
+            initial _isDataMatch = false and if condition didnt met _isDataMatch make true and show in screen
+
+    1.3 likewise 1.2  any other normal method useing function
+
+____________________************___________________*******************_____________________
+
+2.checking if user is logged in or not using sharedpreference (like local storage)
+
+SplashScreen.dart****
+
+checking in sharedpreference___
+
+  Future<void> checkUserLoggedIn() async {
+    final _sharedPerfer = await SharedPreferences.getInstance();
+    final isLogin = _sharedPerfer.getBool(SAVE_KEY_NAME);
+    if (isLogin == null || isLogin == false) {
+      _navigateToNextScreen();
+    } else {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (ctx) => const DashboardScreen()));
+    }
+  }
+
+and call in initstate
+
+LoginScreen.dart*****
+
+setting in sharedpreference__
+
+void loginSubmit(BuildContext context) async{
+    ...
+      final _sharedPref = await SharedPreferences.getInstance();
+      await _sharedPref.setBool(SAVE_KEY_NAME, true);
+    ...
+
+DashboardScreen.dart
+
+clearing all data in sharedpreference
+
+signOut(context) async{
+  ...
+  final _sharedPref = await SharedPreferences.getInstance();
+      await _sharedPref.clear();
+      ...

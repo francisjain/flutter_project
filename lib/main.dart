@@ -8,8 +8,9 @@ import 'package:flutter/material.dart';
 
 import 'locSharedPreference/locSharedpreferences.dart';
 
+const SAVE_KEY_NAME = 'USER_LOGGED_IN';
 void main() {
-  runApp(MainApp());
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -20,7 +21,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
-      home: Splashscreen(),
+      home: const Splashscreen(),
       // routes: {
       //   '/screen_one': (context) => const ScreenOne(),
       //   '/screen_two': (context) => const ScreenTwo(),

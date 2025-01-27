@@ -1,7 +1,10 @@
+import 'package:brocode_tutorial_1/loginSystem/dashboardScreen.dart';
+import 'package:brocode_tutorial_1/main.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -63,9 +66,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Visibility(
-                      child: Text("Login success",
-                          style: TextStyle(color: Colors.green)),
-                      visible: _isDataMatch),
+                      visible: _isDataMatch,
+                      child: Text("Invalid username or password",
+                          style: TextStyle(color: Colors.blue.shade900))),
                   ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.deepPurple,
@@ -75,8 +78,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               borderRadius: BorderRadius.circular(10.0)),
                           iconColor: Colors.white),
                       onPressed: () => {
-                            _formKey.currentState!.validate(),
-                            loginSubmit(context)
+                            if (_formKey.currentState!.validate())
+                              {loginSubmit(context)}
+                            else
+                              {
+                                setState(() {
+                                  _isDataMatch = true;
+                                })
+                              }
                           },
                       icon: const Icon(Icons.login),
                       label: const Text(
@@ -92,11 +101,18 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void loginSubmit(BuildContext context) {
+  void loginSubmit(BuildContext context) async{
     String username = _usernameController.text;
     String password = _passwordController.text;
     print('Username: $username, Password: $password');
     if (username == password) {
+      final _sharedPref = await SharedPreferences.getInstance();
+      await _sharedPref.setBool(SAVE_KEY_NAME, true);
+
+      
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (ctx) => const DashboardScreen()));
+    } else {
       //snakbar
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Login Success'),
@@ -112,15 +128,15 @@ class _LoginScreenState extends State<LoginScreen> {
       showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
-                title: Text('Login Success'),
-                content: Text('you are logged in'),
+                title: const Text('Login Success'),
+                content: const Text('you are logged in'),
                 actions: [
                   TextButton(
                       onPressed: () => Navigator.of(ctx).pop(),
-                      child: Text('Close')),
+                      child: const Text('Close')),
                   TextButton(
                     onPressed: () => Navigator.of(ctx).pop(),
-                    child: Text('Logout'),
+                    child: const Text('Logout'),
                   )
                 ],
               ));
