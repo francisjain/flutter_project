@@ -101,17 +101,17 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void loginSubmit(BuildContext context) async{
+  void loginSubmit(BuildContext context) async {
     String username = _usernameController.text;
     String password = _passwordController.text;
     print('Username: $username, Password: $password');
+    print(username == password);
     if (username == password) {
       final _sharedPref = await SharedPreferences.getInstance();
       await _sharedPref.setBool(SAVE_KEY_NAME, true);
 
-      
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => const DashboardScreen()));
+          MaterialPageRoute(builder: (context) => const DashboardScreen()));
     } else {
       //snakbar
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

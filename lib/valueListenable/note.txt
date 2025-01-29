@@ -1,0 +1,26 @@
+1. ValueListenableBuilder
+
+    valueListenable/counter.dart
+    it is a method that used in stateless widget which can update DOM without state.
+
+//Define the variable___
+     ValueNotifier<int> _count = ValueNotifier(0);
+  void _increament() {
+    _count.value++;
+  }
+
+// setting up in DOM___
+  child: ValueListenableBuilder(
+            valueListenable: _count,
+            builder: (BuildContext context, int value, Widget? child) {
+              return Center(
+                child: Text('Value: $value'),
+              );
+            },
+          ),
+
+// funtion call____
+          floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: _increament,
+      ),

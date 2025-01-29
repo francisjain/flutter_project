@@ -2,21 +2,13 @@
 2.login and signOut functionality useing sharedpreference
 
 
-
-
-
-
-
-
-
-
-
-1. validation
+1. form validation
 
     1.1. form validation____________
 
         final _formKey = GlobalKey<FormState>();
 
+        LoginScreen.dart
         child: Form(
             key: _formKey,            
             //check this condition then if not moves to validator
@@ -38,7 +30,7 @@
                   return null; // Return null if the input is valid
                 },
 
-    1.2 useing state 
+    1.2 using state 
                     Visibility(
                       visible: _isDataMatch,
                       child: Text("Invalid username or password",

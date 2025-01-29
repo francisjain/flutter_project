@@ -1,17 +1,25 @@
-import 'package:brocode_tutorial_1/listview_folder/home_screen.dart';
-import 'package:brocode_tutorial_1/listview_folder/list_view_page.dart';
-import 'package:brocode_tutorial_1/loginSystem/splashScreen.dart';
-import 'package:brocode_tutorial_1/routing_folder/method_2_screen_1.dart';
-import 'package:brocode_tutorial_1/routing_folder/screen_one.dart';
-import 'package:brocode_tutorial_1/routing_folder/screen_two.dart';
+import 'package:brocode_tutorial_1/project/hivedBProject/db/db_models/studentModels.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-import 'locSharedPreference/locSharedpreferences.dart';
+import 'project/hivedBProject/hiveHomepage.dart';
 
 const SAVE_KEY_NAME = 'USER_LOGGED_IN';
-void main() {
+
+
+Future<void> main() async {  
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(StudentModelsAdapter().typeId)) {
+    Hive.registerAdapter(StudentModelsAdapter());
+  }
   runApp(const MainApp());
 }
+
+// void main() {  
+//   runApp(const MainApp());
+// }
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -21,7 +29,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
-      home: const Splashscreen(),
+      home:  HiveHomepage(),
       // routes: {
       //   '/screen_one': (context) => const ScreenOne(),
       //   '/screen_two': (context) => const ScreenTwo(),
